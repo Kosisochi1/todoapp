@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<style>
+			ul {
+				display: flex;
+				flex-direction: row;
+				justify-content: flex-end;
+				list-style-type: none;
+				margin: 0;
+				padding: 0;
+				overflow: hidden;
+				background-color: #fcf7f7;
+			}
+
+			li {
+				display: flex;
+				flex-direction: row;
+			}
+
+			li a,
+			div {
+				display: flex;
+				flex-direction: column;
+				color: rgb(7, 7, 7);
+				text-align: center;
+				padding: 14px 16px;
+				text-decoration: none;
+			}
+
+			li a:hover {
+				background-color: #111;
+			}
+		</style>
+	</head>
+	<body>
+		<ul>
+			<li><a class="active" href="/views/createTask">Create Task</a></li>
+			<li><a href="/views/filter">Filter</a></li>
+
+			<li><a href="/views/logout">Logout</a></li>
+		</ul>
+	</body>
+</html>

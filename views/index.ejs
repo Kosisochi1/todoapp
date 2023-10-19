@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<style>
+			body {
+				background-color: rgb(53, 53, 50);
+				margin: 0;
+			}
+			main {
+				height: 75vh;
+				margin: 2rem auto;
+				background-color: rgb(53, 53, 50);
+			}
+			.main {
+				margin: 2rem auto;
+				background-color: rgb(212, 212, 238);
+				text-align: center;
+			}
+			div {
+				margin: 2rem auto;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				gap: 1.5rem;
+			}
+		</style>
+	</head>
+	<body>
+		<!-- <header><%- include('./partials/header') %></header> -->
+		<main>
+			<div class="main">
+				<h1>ToDo List</h1>
+				<h3>Itemize your daily task</h3>
+			</div>
+			<div>
+				<button><a class="active" href="/views/signup">Signup</a></button>
+				<button><a class="active" href="/views/login">Login</a></button>
+			</div>
+		</main>
+
+		<!-- <h2>Login</h2>
+
+		<form action="/views/login" method="post">
+			<label for="email">Email:</label><br />
+			<input type="text" id="email" name="email" value="" /><br />
+			<label for="password">Password:</label><br />
+			<input
+				type="password"
+				id="password"
+				name="password"
+				value="" /><br /><br />
+			<input type="submit" value="Submit" />
+		</form> -->
+		<footer><%- include('./partials/footer')%></footer>
+	</body>
+</html>

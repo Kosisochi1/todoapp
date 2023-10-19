@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<style>
+			body {
+				background-color: rgb(53, 53, 50);
+				margin: 0;
+			}
+			main {
+				height: 75vh;
+				width: 50vw;
+				margin: 2rem auto;
+				background-color: rgb(53, 53, 50);
+			}
+			.form {
+				margin: 2rem auto;
+				margin-right: auto;
+				width: 200px;
+			}
+			.submit {
+				margin-left: 3.5rem;
+			}
+		</style>
+	</head>
+	<body>
+		<header><%- include('./partials/header') %></header>
+
+		<main class="form">
+			<form action="/views/createTask" method="post">
+				<label for="task">Task:</label><br />
+				<input type="text" id="task" name="task" value="" /><br />
+
+				<!-- <label for="status">Status:</label><br />
+				<input type="status" id="status" name="status" value="" /><br /><br /> -->
+				<input class="submit" type="submit" value="Submit" />
+			</form>
+		</main>
+	</body>
+</html>

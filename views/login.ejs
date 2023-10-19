@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<style>
+			body {
+				background-color: rgb(53, 53, 50);
+				margin: 0;
+			}
+			main {
+				height: 75vh;
+				margin: 2rem auto;
+				background-color: rgb(53, 53, 50);
+			}
+			.form {
+				margin: 2rem auto;
+				margin-right: auto;
+				width: 200px;
+			}
+			.submit {
+				margin-left: 3.5rem;
+			}
+		</style>
+	</head>
+	<body>
+		<header><%- include('./partials/header') %></header>
+
+		<main class="form">
+			<form action="/views/login" method="post">
+				<label for="username">Username:</label><br />
+				<input type="text" id="username" name="username" value="" /><br />
+				<label for="password">Password:</label><br />
+				<input
+					type="password"
+					id="password"
+					name="password"
+					value="" /><br /><br />
+				<input class="submit" type="submit" value="Submit" />
+			</form>
+		</main>
+	</body>
+</html>
