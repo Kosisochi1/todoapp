@@ -17,13 +17,13 @@
 			th,
 			td {
 				text-align: center;
-				border-bottom: 2px;
+				border-bottom: 1px;
 			}
 			th {
 				margin-bottom: 2.5rem;
 			}
 			td {
-				padding: 2rem 1rem;
+				padding: 1rem 1rem;
 			}
 			.div strong {
 				display: flex;
@@ -35,18 +35,44 @@
 				display: flex;
 				justify-content: end;
 			}
+			.filter {
+				margin: 1rem auto;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+			}
 		</style>
 	</head>
 	<body>
 		<header><%- include('./partials/header'); %></header>
 		<div><strong><%= new Date().toUTCString() %></strong></div>
+		<form action="/views/filter" method="post" class="filter">
+			<label for="filter"
+				>Filter
+				<select name="filter" id="filter">
+					<option value="All">All</option>
+					<option value="Pending">Pending</option>
+					<option value="completed">completed</option>
+				</select></label
+			>
+			<button type="submit " name="filter" onclick="this.form.submit">
+				filter
+			</button>
+		</form>
 
 		<h1>
 			Welcome !!! <%if(loginUser){%>
 			<strong><%=loginUser.Username%></strong> <%}%>
+			<h2>Schedule your Task</h2>
 		</h1>
 		<div class="div">
-			<h2>Schedule your Task</h2>
+			<form action="/views/createTask" method="post">
+				<label for="task">
+					Add Task: <input type="text" id="task" name="task" value=""
+				/></label>
+
+				<input class="submit" type="submit" value="Submit" />
+			</form>
 		</div>
 
 		<main>

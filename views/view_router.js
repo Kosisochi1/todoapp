@@ -37,8 +37,10 @@ router.post('/signup', middleware.validateUser, async (req, res) => {
 	});
 	if (response.code === 201) {
 		res.redirect('login');
+	} else if (response.code === 409) {
+		res.render('user_exist');
 	} else {
-		res.render('signup');
+		res.render('server_error');
 	}
 });
 
@@ -52,8 +54,10 @@ router.post('/login', middleware.validateLogin, async (req, res) => {
 	if (response.code === 200) {
 		res.cookie('jwt', response.data.token, { maxAge: 60 * 60 * 1000 });
 		res.redirect('home');
+	} else if (response.code === 422) {
+		res.render('incorrectepass');
 	} else {
-		res.render('index');
+		res.render('User_not_found');
 	}
 });
 
@@ -69,6 +73,29 @@ router.get('/home', authenticate, async (req, res) => {
 		tasks: response.data.displayTask,
 	});
 });
+// filter
+router.post('/filter', authenticate, async (req, res) => {
+	console.log(req.body);
+	if (req.body == { filter: ['All', ''] }) {
+		const response = await createTask.tasks({
+			user_id: res.locals.LoginUser_id,
+		});
+		res.render('filter', {
+			loginUser: res.locals.loginUser,
+			tasks: response.data.displayTask,
+		});
+	} else if (req.body.filter == [{ Status: 'completed' }]) {
+		const response = await createTask.tasks({
+			user_id: res.locals.LoginUser,
+			Status: 'completed',
+		});
+		res.render('home', {
+			loginUser: res.locals.loginUser,
+			tasks: response.data.displayTask,
+		});
+	}
+});
+
 //create Task
 router.post('/createTask', authenticate, async (req, res) => {
 	const response = await createTask.CreateTask({
@@ -108,9 +135,9 @@ router.get('/logout', authenticate, (req, res) => {
 	res.redirect('index');
 });
 router.get('/filter', authenticate, (req, res) => {
-	res.render('filter', { loginUser: res.locals.loginUser });
+	res.render('filter');
 });
-router.post('/filter', async (req, res) => {
-	res.redirect('home');
-});
+// router.post('/filter', async (req, res) => {
+// 	res.redirect('home');
+// });
 module.exports = router;

@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html>
 	<head>
 		<style>
@@ -26,14 +26,138 @@
 		<header><%- include('./partials/header') %></header>
 
 		<main class="form">
-			<form action="/views/filter" method="post">
-				<label for="filter">Filter:</label><br />
-				<input type="text" id="filter" name="filter" value="" /><br />
+			<form action="/views/filter">
+				<label for="filter"
+					>Filter
+					<select name="filter" id="filter">
+						<option value="All">All</option>
+						<option value="Pending">Pending</option>
+						<option value="completed">completed</option>
+					</select></label
+				>
+				<input type="submit" value="Submit" />
+			</form>
+		</main>
+	</body>
+</html> -->
+<!DOCTYPE html>
+<html>
+	<head>
+		<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
+		<link
+			rel="stylesheet"
+			href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+		<style>
+			main {
+				max-width: 60vw;
+				height: 80vh;
+				margin: 0 auto;
+			}
+			table {
+				margin: 1rem auto;
+			}
+			th,
+			td {
+				text-align: center;
+				border-bottom: 2px;
+			}
+			th {
+				margin-bottom: 2.5rem;
+			}
+			td {
+				padding: 2rem 1rem;
+			}
+			.div strong {
+				display: flex;
+				justify-content: start;
+				flex-direction: row;
+				width: 60vw;
+			}
+			div strong {
+				display: flex;
+				justify-content: end;
+			}
+		</style>
+	</head>
+	<body>
+		<header><%- include('./partials/header'); %></header>
+		<div><strong><%= new Date().toUTCString() %></strong></div>
+		<form action="/views/filter" method="post">
+			<label for="filter"
+				>Filter
+				<select name="filter" id="filter">
+					<option value="All">All</option>
+					<option value="Pending">Pending</option>
+					<option value="completed">completed</option>
+				</select></label
+			>
+			<button type="submit " name="filter" onclick="this.form.submit">
+				filter
+			</button>
+		</form>
 
-				<!-- <label for="status">Status:</label><br />
-				<input type="status" id="status" name="status" value="" /><br /><br /> -->
+		<h1>
+			Welcome !!! <%if(loginUser){%>
+			<strong><%=loginUser.Username%></strong> <%}%>
+			<h2>Schedule your Task</h2>
+		</h1>
+		<div class="div">
+			<form action="/views/createTask" method="post">
+				<label for="task">
+					Add Task: <input type="text" id="task" name="task" value=""
+				/></label>
+
 				<input class="submit" type="submit" value="Submit" />
 			</form>
+		</div>
+
+		<main>
+			<table>
+				<tr>
+					<th style="width: 50%">Task</th>
+					<th style="width: 30%">Status</th>
+					<th style="width: 10%">Remove</th>
+				</tr>
+				<% tasks.forEach(function(task) { %>
+				<tr>
+					<td><%= task.Task %></td>
+
+					<td>
+						<%if(task.Status==='Pending'){%>
+						<form action="/views/change" method="post">
+							<%= task.Status %>
+							<input
+								type="radio"
+								name="checkbox"
+								value="<%= task._id%>"
+								onclick="this.form.submit()" />&nbsp
+						</form>
+						<% }else{%>
+						<form action="/views/unchange" method="post">
+							<%= task.Status %>
+							<input
+								type="radio"
+								name="checkbox"
+								checked
+								value="<%= task._id%>"
+								onclick="this.form.submit()" />&nbsp
+						</form>
+						<%}%>
+					</td>
+					<td>
+						<form action="/views/delete" method="post">
+							<button
+								onclick="this.form.submit"
+								name="delete"
+								type="submit"
+								value="<%=task._id%>">
+								<i class="fa fa-trash"></i>
+							</button>
+						</form>
+					</td>
+				</tr>
+				<% }); %>
+			</table>
 		</main>
 	</body>
 </html>
