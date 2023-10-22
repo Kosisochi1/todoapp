@@ -3,8 +3,10 @@ require('dotenv').config();
 const view_router = require('./views/view_router');
 const userRouter = require('./user/userRouter');
 const db = require('./db');
-const PORT = process.env.PORT;
 const app = express();
+
+const PORT = process.env.PORT;
+
 app.use(express.urlencoded({ extended: true }));
 
 // app.use(express.json());
