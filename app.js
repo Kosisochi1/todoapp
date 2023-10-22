@@ -175,12 +175,12 @@ app.get('/views/filter', authenticate, (req, res) => {
 	res.render('filter');
 });
 
-app.get('*', (req, res) => {
-	return res.status(404).json({
-		data: null,
-		error: 'Route not found',
-	});
-});
+// app.get('*', (req, res) => {
+// 	return res.status(404).json({
+// 		data: null,
+// 		error: 'Route not found',
+// 	});
+// });
 
 app.use((err, req, res, next) => {
 	console.error(err.stack);
