@@ -14,7 +14,7 @@ const { find } = require('../model/user_model.js');
 router.use(cookiePearser());
 //landing page
 
-router.get('/index', (req, res) => {
+router.get('/', (req, res) => {
 	res.render('index', { LoginUser: res.locals.loginUser || null });
 });
 
@@ -156,7 +156,7 @@ router.post('/delete', authenticate, async (req, res) => {
 //logout
 router.get('/logout', authenticate, (req, res) => {
 	res.clearCookie('jwt');
-	res.redirect('index');
+	res.redirect('/');
 });
 router.get('/filter', authenticate, (req, res) => {
 	res.render('filter');
