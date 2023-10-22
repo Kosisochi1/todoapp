@@ -33,7 +33,7 @@
 			}
 			.div_header {
 				display: flex;
-				justify-content: end;
+				justify-content: space-between;
 				flex-direction: row;
 			}
 			.filter {
@@ -50,6 +50,11 @@
 	<body>
 		<header><%- include('./partials/header'); %></header>
 		<div class="div_header">
+			<h1>
+				Welcome !!! <%if(loginUser){%>
+				<strong><%=loginUser.Username%></strong> <%}%>
+			</h1>
+
 			<strong><%= new Date().toUTCString() %></strong>
 		</div>
 		<h2>Schedule your Task</h2>
