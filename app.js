@@ -2,7 +2,8 @@ const express = require('express');
 require('dotenv').config();
 const view_router = require('./views/view_router');
 const userRouter = require('./user/userRouter');
-
+const db = require('./db');
+const PORT = process.env.PORT;
 const app = express();
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -25,4 +26,10 @@ app.use((err, req, res, next) => {
 		error: 'Server Error',
 	});
 });
-module.exports = app;
+// module.exports = app;
+
+db.connect();
+
+app.listen(PORT, () => {
+	console.log('Server Started');
+});
