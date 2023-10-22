@@ -6,11 +6,12 @@ const db = require('./db');
 const PORT = process.env.PORT;
 const app = express();
 app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
+
+// app.use(express.json());
 
 app.set('view engine', 'ejs');
 app.use('/views', view_router);
-app.use('/users', userRouter);
+// app.use('/users', userRouter);
 
 app.get('*', (req, res) => {
 	return res.status(404).json({

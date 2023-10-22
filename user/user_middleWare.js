@@ -3,8 +3,8 @@ const joi = require('joi');
 const validateUser = async (req, res, next) => {
 	try {
 		const schema = joi.object({
-			Username: joi.string().required(),
-			Password: joi.string().required(),
+			username: joi.string().required(),
+			password: joi.string().required(),
 		});
 		await schema.validateAsync(req.body, { abortEarly: true });
 		next();
@@ -19,8 +19,8 @@ const validateLogin = async (req, res, next) => {
 	// const LoginReq = req.body;
 	try {
 		const schema = joi.object({
-			Username: joi.string().required(),
-			Password: joi.string().required(),
+			username: joi.string().required(),
+			password: joi.string().required(),
 		});
 		await schema.validateAsync(req.body, { abortEarly: true });
 		next();
