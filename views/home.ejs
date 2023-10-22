@@ -20,10 +20,10 @@
 				border-bottom: 1px;
 			}
 			th {
-				margin-bottom: 2.5rem;
+				margin-bottom: 1rem;
 			}
 			td {
-				padding: 1rem 1rem;
+				padding: 1px;
 			}
 			.div strong {
 				display: flex;
@@ -31,9 +31,10 @@
 				flex-direction: row;
 				width: 60vw;
 			}
-			div strong {
+			.div_header {
 				display: flex;
 				justify-content: end;
+				flex-direction: row;
 			}
 			.filter {
 				margin: 1rem auto;
@@ -41,37 +42,28 @@
 				justify-content: center;
 				align-items: center;
 			}
+			.btn {
+				margin: 1px 0.75rem;
+			}
 		</style>
 	</head>
 	<body>
 		<header><%- include('./partials/header'); %></header>
-		<div><strong><%= new Date().toUTCString() %></strong></div>
-		<form action="/views/filter" method="post" class="filter">
-			<label for="filter"
-				>Filter
-				<select name="filter" id="filter">
-					<option value="All">All</option>
-					<option value="Pending">Pending</option>
-					<option value="completed">completed</option>
-				</select></label
-			>
-			<button type="submit " name="filter" onclick="this.form.submit">
-				filter
-			</button>
-		</form>
+		<div class="div_header">
+			<strong><%= new Date().toUTCString() %></strong>
+		</div>
+		<h2>Schedule your Task</h2>
 
-		<h1>
-			Welcome !!! <%if(loginUser){%>
-			<strong><%=loginUser.Username%></strong> <%}%>
-			<h2>Schedule your Task</h2>
-		</h1>
 		<div class="div">
-			<form action="/views/createTask" method="post">
-				<label for="task">
-					Add Task: <input type="text" id="task" name="task" value=""
-				/></label>
-
-				<input class="submit" type="submit" value="Submit" />
+			<form action="/views/filter" method="post" class="filter">
+				<label for="filter">
+					<select name="filter" id="filter">
+						<option value="All">All</option>
+						<option value="Pending">Pending</option>
+						<option value="completed">completed</option>
+					</select></label
+				>
+				<button type="submit" class="btn">Filter</button>
 			</form>
 		</div>
 
@@ -122,6 +114,15 @@
 				</tr>
 				<% }); %>
 			</table>
+			<div class="div">
+				<form action="/views/createTask" method="post">
+					<label for="task">
+						Add Task: <input type="text" id="task" name="task" value=""
+					/></label>
+
+					<input class="submit" type="submit" value="Submit" />
+				</form>
+			</div>
 		</main>
 	</body>
 </html>

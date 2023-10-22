@@ -12,18 +12,18 @@
 				margin: 0 auto;
 			}
 			table {
-				margin: 0.2rem auto;
+				margin: 1rem auto;
 			}
 			th,
 			td {
 				text-align: center;
-				border-bottom: 1px;
+				border-bottom: 0.2rem;
 			}
 			th {
 				margin-bottom: 0.2rem;
 			}
 			td {
-				padding: 0.2rem 1rem;
+				padding: 0.2rem 0.2rem;
 			}
 			.div strong {
 				display: flex;
@@ -41,6 +41,9 @@
 		<header><%- include('./partials/header'); %></header>
 		<div><strong><%= new Date().toUTCString() %></strong></div>
 
+		<h1>
+			<h2>Schedule your Task</h2>
+		</h1>
 		<div class="div">
 			<form action="/views/filter" method="post" class="filter">
 				<label for="filter">
@@ -64,28 +67,27 @@
 				<% tasks.forEach(function(task) { %>
 				<tr>
 					<td><%= task.Task %></td>
-					<td><%= task.Status %></td>
-					<!-- <td> -->
-					<!-- <%if(task.Status==='Pending'){%> -->
-					<!-- <form action="/views/change" method="post">
+					<td>
+						<%= task.Status %>
+						<!-- <%if(task.Status==='completed'){%>
+						<form action="/views/change" method="post">
 							<input
 								type="radio"
 								name="checkbox"
 								value="<%= task._id%>"
 								onclick="this.form.submit()" />&nbsp
-						</form>
-						<% }else{%> -->
-					<!-- <form action="/views/unchange" method="post">
+						</form> -->
+						<!-- <% }else{%>
+						<form action="/views/unchange" method="post">
 							<%= task.Status %>
 							<input
 								type="radio"
 								name="checkbox"
-								checked
 								value="<%= task._id%>"
-								onclick="this.form.submit()" />
-						</form>
-						<%}%>
-					</td> -->
+								onclick="this.form.submit()" />&nbsp
+						</form> -->
+						<!-- <%}%> -->
+					</td>
 					<td>
 						<form action="/views/delete" method="post">
 							<button

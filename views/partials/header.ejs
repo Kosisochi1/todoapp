@@ -31,12 +31,18 @@
 			li a:hover {
 				background-color: #111;
 			}
+			.header {
+				display: flex;
+				justify-content: space-between;
+			}
 		</style>
 	</head>
 	<body>
-		<ul>
-			<li><a href="/views/filter">Filter</a></li>
-
+		<ul class="header">
+			<h1>
+				Welcome <%if(loginUser){%>
+				<strong><%=loginUser.Username%> !!!</strong> <%}%>
+			</h1>
 			<li><a href="/views/logout">Logout</a></li>
 		</ul>
 	</body>

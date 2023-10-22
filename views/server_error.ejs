@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html>
 	<head>
 		<style>
@@ -21,6 +21,43 @@
 		<div>
 			<button><a class="active" href="/views/signup">Signup</a></button>
 			<button><a class="active" href="/views/login">Login</a></button>
+		</div>
+	</body>
+</html> -->
+<!DOCTYPE html>
+<html>
+	<head>
+		<style>
+			body {
+				background-color: rgb(53, 53, 50);
+				margin: 0;
+			}
+			.main {
+				height: 75vh;
+				width: 30vw;
+				margin: 2rem auto;
+				background-color: rgb(53, 53, 50);
+			}
+			div .btn {
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				flex-direction: row;
+			}
+			h1 {
+				color: bisque;
+			}
+		</style>
+	</head>
+	<body>
+		<header><%- include('./partials/header') %></header>
+
+		<div class="main">
+			<h1>SERVER ERROR</h1>
+			<div class="btn">
+				<button><a class="active" href="/views/signup">Signup</a></button>
+				<button><a class="active" href="/views/login">Login</a></button>
+			</div>
 		</div>
 	</body>
 </html>

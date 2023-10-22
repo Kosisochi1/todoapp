@@ -16,7 +16,8 @@ const CreateTask = async ({ Task, user_id }) => {
 		};
 	}
 };
-const tasks = async () => {
+const tasks = async ({ Status, user_id }) => {
+	const reqBody = { Status, user_id };
 	try {
 		const displayTask = await TaskModel.find({});
 		return {
@@ -29,6 +30,41 @@ const tasks = async () => {
 	} catch (error) {
 		return {
 			massage: 'No Task List',
+			code: 400,
+		};
+	}
+};
+const tasksFilter = async ({ Status, user_id }) => {
+	try {
+		const displayTask = await TaskModel.find({ Status: 'completed' });
+		return {
+			massage: 'completed',
+			code: 200,
+			data: {
+				displayTask,
+			},
+		};
+	} catch (error) {
+		return {
+			massage: 'completed List',
+			code: 400,
+		};
+	}
+};
+//pending tasks
+const tasksPending = async ({ Status, user_id }) => {
+	try {
+		const displayTask = await TaskModel.find({ Status: 'Pending' });
+		return {
+			massage: 'completed',
+			code: 200,
+			data: {
+				displayTask,
+			},
+		};
+	} catch (error) {
+		return {
+			massage: 'Pending List',
 			code: 400,
 		};
 	}
@@ -92,4 +128,6 @@ module.exports = {
 	updateTask,
 	undoTaskUpdate,
 	deleteTask,
+	tasksFilter,
+	tasksPending,
 };

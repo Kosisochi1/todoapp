@@ -3,25 +3,23 @@ const jwt = require('jsonwebtoken');
 require('dotenv').config();
 const logger = require('../logger/index');
 
-const createUser = async ({ Username, Password }) => {
+const createUser = async (req, res) => {
 	try {
+		const userReq = req.body;
 		logger.info('[CreateUser] => Create  user process started');
-		const userReq = { Username, Password };
 		const existingUser = await UserModel.findOne({
 			Username: userReq.Username,
 		});
 		if (existingUser) {
 			logger.info('[CreateUser] => existing User');
-
-			return {
-				massage: 'User already created',
-				code: 409,
-			};
+			return res.status(409).json({
+				massage: 'user already created',
+			});
 		}
 
 		const loginUser = await UserModel.create({
-			Username: userReq.Username,
-			Password: userReq.Password,
+			Username: req.body.Username,
+			Password: req.body.Password,
 		});
 		const token = await jwt.sign(
 			{ Username: loginUser.Username, _id: loginUser._id },
@@ -29,34 +27,30 @@ const createUser = async ({ Username, Password }) => {
 		);
 		logger.info('[CreateUser] => user successfully created');
 
-		return {
-			massage: 'User created successful',
-			code: 201,
+		return res.status(201).json({
+			massage: 'User successfully created',
 			data: {
 				token,
 				loginUser,
 			},
-		};
+		});
 	} catch (error) {
-		return {
+		return res.status(500).json({
 			massage: 'Server error',
-			code: 500,
 			data: null,
-		};
+		});
 	}
 };
-
-const LoginUser = async ({ Username, Password }) => {
+const LoginUser = async (req, res) => {
 	try {
 		logger.info('[LoginUser] => Login  process started');
 
-		const loginReq = { Username, Password };
+		const loginReq = req.body;
 		const loginUser = await UserModel.findOne({ Username: loginReq.Username });
 		if (!loginUser) {
-			return {
-				massage: 'User not found',
-				code: 404,
-			};
+			return res.status(404).json({
+				massage: 'User not Found',
+			});
 		}
 		const valididatePassword = await loginUser.isValidPassword(
 			loginReq.Password
@@ -64,10 +58,9 @@ const LoginUser = async ({ Username, Password }) => {
 		if (!valididatePassword) {
 			logger.info('[LoginUser] => Invalid Password or Username');
 
-			return {
-				massage: 'Incorrect Password or Email',
-				code: 422,
-			};
+			return res.status(422).json({
+				massage: 'Incorrect Password and Email',
+			});
 		}
 		const token = await jwt.sign(
 			{ Username: loginUser.Username, _id: loginUser._id },
@@ -76,19 +69,17 @@ const LoginUser = async ({ Username, Password }) => {
 		);
 		logger.info('[LoginUser] => Login process done');
 
-		return {
-			massage: 'Login successful',
-			code: 200,
+		return res.status(200).json({
+			massage: 'Login Successfully',
 			data: {
 				loginUser,
 				token,
 			},
-		};
-	} catch (error) {
-		return res.status(500).json({
-			massage: 'Server error',
-			data: null,
 		});
+	} catch (error) {
+		return {
+			massage: 'Login Failed',
+		};
 	}
 };
 

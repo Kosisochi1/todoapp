@@ -67,32 +67,56 @@ router.get('/createTask', (req, res) => {
 });
 // router.use(authenticate);
 router.get('/home', authenticate, async (req, res) => {
-	const response = await createTask.tasks({ user_id: res.locals.LoginUser });
+	const response = await createTask.tasks({
+		user_id: res.locals.loginUser._id,
+		Status: 'Pending' || 'completed',
+	});
 	res.render('home', {
+		loginUser: res.locals.loginUser,
+		tasks: response.data.displayTask,
+	});
+});
+router.get('/filter', authenticate, async (req, res) => {
+	const response = await createTask.tasksFilter({
+		user_id: res.locals.loginUser._id,
+		Status: 'completed',
+	});
+	res.render('filter', {
+		loginUser: res.locals.loginUser,
+		tasks: response.data.displayTask,
+	});
+});
+router.get('/filterCompleted', authenticate, async (req, res) => {
+	const response = await createTask.tasksPending({
+		user_id: res.locals.loginUser._id,
+		Status: req.body.filter,
+	});
+	res.render('filterCompleted', {
 		loginUser: res.locals.loginUser,
 		tasks: response.data.displayTask,
 	});
 });
 // filter
 router.post('/filter', authenticate, async (req, res) => {
-	console.log(req.body);
-	if (req.body == { filter: ['All', ''] }) {
-		const response = await createTask.tasks({
-			user_id: res.locals.LoginUser_id,
-		});
-		res.render('filter', {
-			loginUser: res.locals.loginUser,
-			tasks: response.data.displayTask,
-		});
-	} else if (req.body.filter == [{ Status: 'completed' }]) {
-		const response = await createTask.tasks({
-			user_id: res.locals.LoginUser,
+	console.log(req.body.filter);
+	if (req.body.filter === 'completed') {
+		await createTask.tasksFilter({
 			Status: 'completed',
+			user_id: res.locals.loginUser._id,
 		});
-		res.render('home', {
-			loginUser: res.locals.loginUser,
-			tasks: response.data.displayTask,
+		res.redirect('filter');
+	} else if (req.body.filter === 'Pending') {
+		await createTask.tasksPending({
+			Status: 'Pending',
+			user_id: res.locals.loginUser._id,
 		});
+		res.redirect('filterCompleted');
+	} else {
+		await createTask.tasks({
+			Status: 'Pending' || 'completed',
+			user_id: res.locals.loginUser._id,
+		});
+		res.redirect('home');
 	}
 });
 
