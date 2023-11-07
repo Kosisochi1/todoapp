@@ -35,11 +35,11 @@ router.post('/signup', middleware.validateUser, async (req, res) => {
 		Password: req.body.password,
 	});
 	if (response.code === 201) {
-		res.render('successful');
+		res.render('successful', { loginUser: res.locals.loginUser || null });
 	} else if (response.code === 409) {
-		res.render('user_exist');
+		res.render('user_exist', { loginUser: res.locals.loginUser || null });
 	} else {
-		res.render('server_error');
+		res.render('server_error', { loginUser: res.locals.loginUser || null });
 	}
 });
 
