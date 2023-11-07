@@ -19,7 +19,7 @@ const CreateTask = async ({ Task, user_id }) => {
 const tasks = async ({ Status, user_id }) => {
 	const reqBody = { Status, user_id };
 	try {
-		const displayTask = await TaskModel.find({});
+		const displayTask = await TaskModel.find({ user_id: reqBody.user_id });
 		return {
 			massage: 'All the list',
 			code: 200,
@@ -35,8 +35,12 @@ const tasks = async ({ Status, user_id }) => {
 	}
 };
 const tasksFilter = async ({ Status, user_id }) => {
+	const reqBody = { Status, user_id };
 	try {
-		const displayTask = await TaskModel.find({ Status: 'completed' });
+		const displayTask = await TaskModel.find({
+			Status: 'completed',
+			user_id: reqBody.user_id,
+		});
 		return {
 			massage: 'completed',
 			code: 200,

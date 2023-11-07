@@ -54,8 +54,8 @@
 		<header><%- include('./partials/header'); %></header>
 		<div class="div_header">
 			<h1>
-				Welcome !!! <%if(loginUser){%>
-				<strong><%=loginUser.Username%></strong> <%}%>
+				Welcome <%if(loginUser){%>
+				<strong><%=loginUser.Username%></strong> !!!<%}%>
 			</h1>
 
 			<strong><%= new Date().toUTCString() %></strong>
@@ -77,52 +77,50 @@
 
 		<main>
 			<table>
-				<div class="display">
-					<tr>
-						<th style="width: 50%">Task</th>
-						<th style="width: 30%">Status</th>
-						<th style="width: 10%">Remove</th>
-					</tr>
-					<% tasks.forEach(function(task) { %>
-					<tr>
-						<td><%= task.Task %></td>
+				<tr>
+					<th style="width: 50%">Task</th>
+					<th style="width: 30%">Status</th>
+					<th style="width: 10%">Remove</th>
+				</tr>
+				<% tasks.forEach(function(task) { %>
+				<tr>
+					<td><%= task.Task %></td>
 
-						<td>
-							<%if(task.Status==='Pending'){%>
-							<form action="/views/change" method="post">
-								<%= task.Status %>
-								<input
-									type="radio"
-									name="checkbox"
-									value="<%= task._id%>"
-									onclick="this.form.submit()" />&nbsp
-							</form>
-							<% }else{%>
-							<form action="/views/unchange" method="post">
-								<%= task.Status %>
-								<input
-									type="radio"
-									name="checkbox"
-									checked
-									value="<%= task._id%>"
-									onclick="this.form.submit()" />&nbsp
-							</form>
-							<%}%>
-						</td>
-						<td>
-							<form action="/views/delete" method="post">
-								<button
-									onclick="this.form.submit"
-									name="delete"
-									type="submit"
-									value="<%=task._id%>">
-									<i class="fa fa-trash"></i>
-								</button>
-							</form>
-						</td>
-					</tr>
-					<% }); %>
-				</div>
+					<td>
+						<%if(task.Status==='Pending'){%>
+						<form action="/views/change" method="post">
+							<%= task.Status %>
+							<input
+								type="radio"
+								name="checkbox"
+								value="<%= task._id%>"
+								onclick="this.form.submit()" />&nbsp
+						</form>
+						<% }else{%>
+						<form action="/views/unchange" method="post">
+							<%= task.Status %>
+							<input
+								type="radio"
+								name="checkbox"
+								checked
+								value="<%= task._id%>"
+								onclick="this.form.submit()" />&nbsp
+						</form>
+						<%}%>
+					</td>
+					<td>
+						<form action="/views/delete" method="post">
+							<button
+								onclick="this.form.submit"
+								name="delete"
+								type="submit"
+								value="<%=task._id%>">
+								<i class="fa fa-trash"></i>
+							</button>
+						</form>
+					</td>
+				</tr>
+				<% }); %>
 			</table>
 			<div class="div">
 				<form action="/views/createTask" method="post">
@@ -130,7 +128,7 @@
 						Add Task: <input type="text" id="task" name="task" value=""
 					/></label>
 
-					<input class="submit" type="submit" value="Submit" />
+					<input class="submit" type="submit" value="Add" />
 				</form>
 			</div>
 		</main>

@@ -31,15 +31,20 @@
 				flex-direction: row;
 				width: 60vw;
 			}
-			div strong {
+			/* div strong {
 				display: flex;
 				justify-content: end;
-			}
+			} */
 			.filter {
 				margin: 1rem auto;
 				display: flex;
 				justify-content: center;
 				align-items: center;
+			}
+			.div_header {
+				display: flex;
+				justify-content: space-between;
+				flex-direction: row;
 			}
 		</style>
 	</head>
@@ -47,8 +52,8 @@
 		<header><%- include('./partials/header'); %></header>
 		<div class="div_header">
 			<h1>
-				Welcome !!! <%if(loginUser){%>
-				<strong><%=loginUser.Username%></strong> <%}%>
+				Welcome <%if(loginUser){%>
+				<strong><%=loginUser.Username%></strong> !!! <%}%>
 			</h1>
 
 			<strong><%= new Date().toUTCString() %></strong>

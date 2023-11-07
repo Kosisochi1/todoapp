@@ -30,13 +30,12 @@ router.get('/login', (req, res) => {
 
 //Signup
 router.post('/signup', middleware.validateUser, async (req, res) => {
-	console.log(req.body);
 	const response = await userService.createUser({
 		Username: req.body.username,
 		Password: req.body.password,
 	});
 	if (response.code === 201) {
-		res.redirect('login');
+		res.render('successful');
 	} else if (response.code === 409) {
 		res.render('user_exist');
 	} else {
@@ -46,7 +45,6 @@ router.post('/signup', middleware.validateUser, async (req, res) => {
 
 // Login
 router.post('/login', middleware.validateLogin, async (req, res) => {
-	console.log(req.body);
 	const response = await userService.LoginUser({
 		Username: req.body.username,
 		Password: req.body.password,
@@ -69,7 +67,7 @@ router.get('/createTask', (req, res) => {
 router.get('/home', authenticate, async (req, res) => {
 	const response = await createTask.tasks({
 		user_id: res.locals.loginUser._id,
-		Status: 'Pending' || 'completed',
+		// Status: 'Pending'  'completed',
 	});
 	res.render('home', {
 		loginUser: res.locals.loginUser,
@@ -79,7 +77,7 @@ router.get('/home', authenticate, async (req, res) => {
 router.get('/filter', authenticate, async (req, res) => {
 	const response = await createTask.tasksFilter({
 		user_id: res.locals.loginUser._id,
-		Status: 'completed',
+		Status: req.body.filter,
 	});
 	res.render('filter', {
 		loginUser: res.locals.loginUser,
@@ -98,7 +96,6 @@ router.get('/filterCompleted', authenticate, async (req, res) => {
 });
 // filter
 router.post('/filter', authenticate, async (req, res) => {
-	console.log(req.body.filter);
 	if (req.body.filter === 'completed') {
 		await createTask.tasksFilter({
 			Status: 'completed',
@@ -113,7 +110,7 @@ router.post('/filter', authenticate, async (req, res) => {
 		res.redirect('filterCompleted');
 	} else {
 		await createTask.tasks({
-			Status: 'Pending' || 'completed',
+			// Status: 'Pending' || 'completed',
 			user_id: res.locals.loginUser._id,
 		});
 		res.redirect('home');
