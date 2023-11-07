@@ -77,13 +77,13 @@
 
 		<main>
 			<table>
-				<tr>
-					<th style="width: 50%">Task</th>
-					<th style="width: 30%">Status</th>
-					<th style="width: 10%">Remove</th>
-				</tr>
-				<% tasks.forEach(function(task) { %>
 				<div class="display">
+					<tr>
+						<th style="width: 50%">Task</th>
+						<th style="width: 30%">Status</th>
+						<th style="width: 10%">Remove</th>
+					</tr>
+					<% tasks.forEach(function(task) { %>
 					<tr>
 						<td><%= task.Task %></td>
 
@@ -121,8 +121,8 @@
 							</form>
 						</td>
 					</tr>
+					<% }); %>
 				</div>
-				<% }); %>
 			</table>
 			<div class="div">
 				<form action="/views/createTask" method="post">
