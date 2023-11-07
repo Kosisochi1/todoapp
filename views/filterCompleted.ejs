@@ -35,15 +35,25 @@
 				display: flex;
 				justify-content: end;
 			}
+			.filter {
+				margin: 1rem auto;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+			}
 		</style>
 	</head>
 	<body>
 		<header><%- include('./partials/header'); %></header>
-		<div><strong><%= new Date().toUTCString() %></strong></div>
+		<div class="div_header">
+			<h1>
+				Welcome !!! <%if(loginUser){%>
+				<strong><%=loginUser.Username%></strong> <%}%>
+			</h1>
 
-		<h1>
-			<h2>Schedule your Task</h2>
-		</h1>
+			<strong><%= new Date().toUTCString() %></strong>
+		</div>
+		<h2>Schedule your Task</h2>
 		<div class="div">
 			<form action="/views/filter" method="post" class="filter">
 				<label for="filter">

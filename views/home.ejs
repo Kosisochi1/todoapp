@@ -45,6 +45,9 @@
 			.btn {
 				margin: 1px 0.75rem;
 			}
+			.display {
+				border: 2px solid black;
+			}
 		</style>
 	</head>
 	<body>
@@ -81,41 +84,43 @@
 				</tr>
 				<% tasks.forEach(function(task) { %>
 				<tr>
-					<td><%= task.Task %></td>
+					<div class="display">
+						<td><%= task.Task %></td>
 
-					<td>
-						<%if(task.Status==='Pending'){%>
-						<form action="/views/change" method="post">
-							<%= task.Status %>
-							<input
-								type="radio"
-								name="checkbox"
-								value="<%= task._id%>"
-								onclick="this.form.submit()" />&nbsp
-						</form>
-						<% }else{%>
-						<form action="/views/unchange" method="post">
-							<%= task.Status %>
-							<input
-								type="radio"
-								name="checkbox"
-								checked
-								value="<%= task._id%>"
-								onclick="this.form.submit()" />&nbsp
-						</form>
-						<%}%>
-					</td>
-					<td>
-						<form action="/views/delete" method="post">
-							<button
-								onclick="this.form.submit"
-								name="delete"
-								type="submit"
-								value="<%=task._id%>">
-								<i class="fa fa-trash"></i>
-							</button>
-						</form>
-					</td>
+						<td>
+							<%if(task.Status==='Pending'){%>
+							<form action="/views/change" method="post">
+								<%= task.Status %>
+								<input
+									type="radio"
+									name="checkbox"
+									value="<%= task._id%>"
+									onclick="this.form.submit()" />&nbsp
+							</form>
+							<% }else{%>
+							<form action="/views/unchange" method="post">
+								<%= task.Status %>
+								<input
+									type="radio"
+									name="checkbox"
+									checked
+									value="<%= task._id%>"
+									onclick="this.form.submit()" />&nbsp
+							</form>
+							<%}%>
+						</td>
+						<td>
+							<form action="/views/delete" method="post">
+								<button
+									onclick="this.form.submit"
+									name="delete"
+									type="submit"
+									value="<%=task._id%>">
+									<i class="fa fa-trash"></i>
+								</button>
+							</form>
+						</td>
+					</div>
 				</tr>
 				<% }); %>
 			</table>
