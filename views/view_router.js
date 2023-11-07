@@ -53,9 +53,9 @@ router.post('/login', middleware.validateLogin, async (req, res) => {
 		res.cookie('jwt', response.data.token, { maxAge: 60 * 60 * 1000 });
 		res.redirect('home');
 	} else if (response.code === 422) {
-		res.render('incorrectepass');
+		res.render('incorrectepass', { loginUser: res.locals.loginUser || null });
 	} else {
-		res.render('User_not_found');
+		res.render('User_not_found', { loginUser: res.locals.loginUser || null });
 	}
 });
 
