@@ -39,7 +39,11 @@
 	</head>
 	<body>
 		<ul class="header">
+			<%if(!loginUser){%>
+			<li><a href="#home">Welcome</a></li>
+			<%} else{%>
 			<li><a href="/views/logout">Logout</a></li>
+			<%}%>
 		</ul>
 	</body>
 </html>

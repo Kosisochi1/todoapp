@@ -15,17 +15,17 @@ router.use(cookiePearser());
 //landing page
 
 router.get('/', (req, res) => {
-	res.render('index', { LoginUser: res.locals.loginUser || null });
+	res.render('index', { loginUser: res.locals.loginUser || null });
 });
 
 //route to signup page
 router.get('/signup', async (req, res) => {
-	res.render('signup', { LoginUser: res.locals.loginUser || null });
+	res.render('signup', { loginUser: res.locals.loginUser || null });
 });
 
 // //route to Login Page
 router.get('/login', (req, res) => {
-	res.render('login');
+	res.render('login', { loginUser: res.locals.loginUser || null });
 });
 
 //Signup

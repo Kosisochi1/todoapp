@@ -17,7 +17,7 @@ app.set('view engine', 'ejs');
 app.use('/views', view_router);
 app.use('/users', userRouter);
 app.get('/', (req, res) => {
-	res.render('index', { LoginUser: res.locals.loginUser || null });
+	res.render('index', { loginUser: res.locals.loginUser || null });
 });
 
 app.get('*', (req, res) => {
